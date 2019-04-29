@@ -29,24 +29,7 @@ public class Task1 implements Task {
         String text = read(input);
         write(output, text);
 
-        /*
-         * TODO(Студент): Выполнить задание №1
-         *
-         * 1. Реализовать метод read.
-         *
-         *    При чтении файла следует пользоваться типами данных:
-         *    InputStream и FileInputStream.
-         *
-         *    Для сохранениня прочитанных данных следует пользоваться
-         *    классом ByteArrayOutputStream.
-         *
-         * 2. Реализовать метод write.
-         *
-         *    При реализации метода следует пользоваться типами данных:
-         *    OutputStream и FileOutputStream.
-         *
-         * 3. С использованием отладчика проверить корректность работы программы.
-         */
+
     }
 
     /**
@@ -68,7 +51,10 @@ public class Task1 implements Task {
         while ((lenght = stream.read(buffer)) > 0) {
             memory.write(buffer, 0, lenght);          
         }
-        return memory.toString();
+        String result = memory.toString();
+        memory.close();
+        stream.close();
+        return result;
     }
 
     /**

@@ -2,8 +2,8 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+
 
 /**
  * Задание №2
@@ -23,25 +23,7 @@ public class Task2 implements Task {
         String text = read(input);
         write(output, text);
 
-        /*
-         * TODO(Студент): Выполнить задание №2
-         *
-         * 1. Реализовать метод read.
-         *
-         *    При чтении файла следует пользоваться типами данных:
-         *    Reader, FileReader.
-         *
-         *    Для сохранения прочитанных данных следует пользоваться
-         *    классом StringBuilder.
-         *
-         * 2. Реализовать метод write.
-         *
-         *    При реализации метода следует пользоваться типами данных:
-         *    Writer и FileWriter.
-         *
-         * 3. С использованием отладчика проверить корректность работы программы.
-         */
-    }
+     }
 
     /**
      * Выполняет чтение указанного файла в текстовом режиме.
@@ -54,7 +36,16 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        try(InputStream stream =  new FileInputStream(file);
+        Reader reader = new InputStreamReader(stream)){
+            StringBuilder builder = new StringBuilder();
+            char[] buffer = new char[10];
+            int len;
+            while ((len = reader.read(buffer)) != -1){
+                builder.append(buffer, 0, len);
+            }
+            return builder.toString();
+        }
     }
 
     /**
@@ -66,6 +57,8 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        try(Writer writer = new FileWriter(file)){
+            writer.write(text);
+        } 
     }
 }
